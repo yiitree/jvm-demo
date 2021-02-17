@@ -2,12 +2,16 @@ package com.atguigu.java2;
 
 /**
  * 栈上分配测试
+ * 不开启
  * -Xmx1G -Xms1G -XX:-DoEscapeAnalysis -XX:+PrintGCDetails
+ * 开启
+ * -Xmx1G -Xms1G -XX:+DoEscapeAnalysis -XX:+PrintGCDetails
  * @author shkstart  shkstart@126.com
  * @create 2020  10:31
  */
 public class StackAllocation {
     public static void main(String[] args) {
+
         long start = System.currentTimeMillis();
 
         for (int i = 0; i < 10000000; i++) {
@@ -22,10 +26,12 @@ public class StackAllocation {
         } catch (InterruptedException e1) {
             e1.printStackTrace();
         }
+
     }
 
     private static void alloc() {
-        User user = new User();//未发生逃逸
+        //未发生逃逸
+        User user = new User();
     }
 
     static class User {
