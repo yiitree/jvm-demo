@@ -58,4 +58,24 @@ public class OperandStackTest {
         int i9 = 10;
         int i10 = i9++ + ++i9;
     }
+
+    public void add1(){
+        //第1类问题：
+        int i1 = 10;
+        i1++;
+    }
+
+    public void add2(){
+        //第1类问题：
+        int i2 = 10;
+        ++i2;
+    }
+
+    public static void main(String[] args) {
+        //第1类问题：
+        int i1 = 10;
+        System.out.println(i1++);
+        int i2 = 10;
+        System.out.println(++i2);
+    }
 }
