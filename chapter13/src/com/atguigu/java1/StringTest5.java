@@ -4,8 +4,6 @@ import org.junit.Test;
 
 /**
  * 字符串拼接操作
- * @author shkstart  shkstart@126.com
- * @create 2020  0:59
  */
 public class StringTest5 {
     @Test
@@ -28,7 +26,9 @@ public class StringTest5 {
 
         String s3 = "javaEEhadoop";
         String s4 = "javaEE" + "hadoop";//编译期优化
-        //如果拼接符号的前后出现了变量，则相当于在堆空间中new String()，具体的内容为拼接的结果：javaEEhadoop
+        //如果拼接符号的前后出现了变量，则相当于在堆空间中new String()，
+        // 具体的内容为拼接的结果：javaEEhadoop
+        // 常量池中不能重复，但是堆空间中就随意了
         String s5 = s1 + "hadoop";
         String s6 = "javaEE" + s2;
         String s7 = s1 + s2;
@@ -70,10 +70,10 @@ public class StringTest5 {
      */
     @Test
     public void test4(){
-        final String s1 = "a";
+        final String s1 = "a";//常量
         final String s2 = "b";
         String s3 = "ab";
-        String s4 = s1 + s2;
+        String s4 = s1 + s2;//两个都是常量，就直接编译器优化了
         System.out.println(s3 == s4);//true
     }
     //练习：

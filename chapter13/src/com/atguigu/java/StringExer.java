@@ -1,23 +1,31 @@
 package com.atguigu.java;
 
 /**
- * @author shkstart  shkstart@126.com
- * @create 2020  23:44
+ * 面试案例
  */
 public class StringExer {
-    String str = new String("good");
+
+    int i = 10;
+    String str = "good";
     char[] ch = {'t', 'e', 's', 't'};
 
-    public void change(String str, char ch[]) {
-        str = "test ok";
+    public void change(int i, String str, char ch[]) {
+        i = 0;
+        str = "test ok";// 指的是str方法内部变量，
+//        this.str = "xxx";// 这个才是类变量，方法变量和类变量没有影响
         ch[0] = 'b';
+
     }
 
     public static void main(String[] args) {
         StringExer ex = new StringExer();
-        ex.change(ex.str, ex.ch);
-        System.out.println(ex.str);//good
-        System.out.println(ex.ch);//best
+        ex.change(ex.i, ex.str,ex.ch);
+
+        System.out.println(ex.i);
+        // good --- String的不可变性，是创建新的变量
+        System.out.println(ex.str);
+        // best 修改数组的某一个选项
+        System.out.println(ex.ch);
     }
 
 }

@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
+ * 读取word文件，然后吧刚刚生成的10万个字符串保存到字符串常量池中，
+ * 如果常量池大，就不同意hash碰撞，放的时候就比较快，查找的时候也很快，所以用时比较少，（因为不重复）
  *  -XX:StringTableSize=1009
  * @author shkstart  shkstart@126.com
  * @create 2020  23:53

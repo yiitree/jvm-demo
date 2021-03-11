@@ -33,7 +33,6 @@ class Father{
 
 class Son extends Father {
     Son(){
-
     }
     int i;
     Son(int j){

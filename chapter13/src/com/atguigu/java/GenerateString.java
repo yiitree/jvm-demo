@@ -5,8 +5,6 @@ import java.io.IOException;
 
 /**
  * 产生10万个长度不超过10的字符串，包含a-z,A-Z
- * @author shkstart  shkstart@126.com
- * @create 2020  23:58
  */
 public class GenerateString {
     public static void main(String[] args) throws IOException {

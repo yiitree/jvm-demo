@@ -1,17 +1,12 @@
 package com.atguigu.java1;
 
-import org.junit.Test;
-
-import javax.annotation.processing.SupportedSourceVersion;
-import java.sql.SQLOutput;
-
 /**
  * @author shkstart  shkstart@126.com
  * @create 2020  0:49
  */
 public class StringTest4 {
     public static void main(String[] args) {
-        System.out.println();//2293
+        System.out.println();//2293----此时内存中字符串数量
         System.out.println("1");//2294
         System.out.println("2");
         System.out.println("3");
