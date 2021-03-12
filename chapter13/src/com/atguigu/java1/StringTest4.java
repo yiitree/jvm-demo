@@ -1,9 +1,5 @@
 package com.atguigu.java1;
 
-import org.junit.Test;
-
-import javax.annotation.processing.SupportedSourceVersion;
-import java.sql.SQLOutput;
 
 /**
  * @author shkstart  shkstart@126.com
