@@ -1,7 +1,5 @@
 package com.atguigu.java2;
 
-import java.util.Random;
-
 /**
  * 使用intern()测试执行效率：空间使用上
  *
@@ -21,8 +19,9 @@ public class StringIntern2 {
         long start = System.currentTimeMillis();
         for (int i = 0; i < MAX_COUNT; i++) {
 //            arr[i] = new String(String.valueOf(data[i % data.length]));
-            arr[i] = new String(String.valueOf(data[i % data.length])).intern();
-
+//            arr[i] = new String(String.valueOf(data[i % data.length])).intern();
+//            arr[i] = String.valueOf(data[i % data.length]);
+            arr[i] = String.valueOf(data[i % data.length]).intern();
         }
         long end = System.currentTimeMillis();
         System.out.println("花费的时间为：" + (end - start));
