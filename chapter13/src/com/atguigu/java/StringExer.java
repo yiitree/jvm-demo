@@ -15,6 +15,7 @@ public class StringExer {
 //        this.str = "xxx";// 这个才是类变量，方法变量和类变量没有影响
         ch[0] = 'b';
 
+
     }
 
     public static void main(String[] args) {

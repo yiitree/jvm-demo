@@ -7,25 +7,29 @@ package com.atguigu.java;
  * @create 2020 下午 2:57
  */
 public class CanReliveObj {
-    public static CanReliveObj obj;//类变量，属于 GC Root
 
+    //类变量，属于 GC Root
+    public static CanReliveObj obj;
 
     //此方法只能被调用一次
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
         System.out.println("调用当前类重写的finalize()方法");
-        obj = this;//当前待回收的对象在finalize()方法中与引用链上的一个对象obj建立了联系
+        //当前待回收的对象在finalize()方法中与引用链上的一个对象obj建立了联系
+        obj = this;
     }
 
 
     public static void main(String[] args) {
         try {
             obj = new CanReliveObj();
-            // 对象第一次成功拯救自己
+            // 把对象设置为空，进行垃圾回收
             obj = null;
-            System.gc();//调用垃圾回收器
-            System.out.println("第1次 gc");
+            //调用垃圾回收器
+            System.gc();
+
+            System.out.println("------------第1次 gc------------------");
             // 因为Finalizer线程优先级很低，暂停2秒，以等待它
             Thread.sleep(2000);
             if (obj == null) {
@@ -33,11 +37,11 @@ public class CanReliveObj {
             } else {
                 System.out.println("obj is still alive");
             }
-            System.out.println("第2次 gc");
+
+            System.out.println("--------------第2次 gc-----------------");
             // 下面这段代码与上面的完全相同，但是这次自救却失败了
             obj = null;
             System.gc();
-            // 因为Finalizer线程优先级很低，暂停2秒，以等待它
             Thread.sleep(2000);
             if (obj == null) {
                 System.out.println("obj is dead");
