@@ -10,9 +10,15 @@ import java.lang.ref.ReferenceQueue;
  * @create 2020  16:07
  */
 public class PhantomReferenceTest {
-    public static PhantomReferenceTest obj;//当前类对象的声明
-    static ReferenceQueue<PhantomReferenceTest> phantomQueue = null;//引用队列
 
+    //当前类对象的声明
+    public static PhantomReferenceTest obj;
+    //引用队列
+    private static ReferenceQueue<PhantomReferenceTest> phantomQueue = null;
+
+    /**
+     * 开开启一个线程，遍历虚引用的队列
+     */
     public static class CheckRefQueue extends Thread {
         @Override
         public void run() {
@@ -20,6 +26,7 @@ public class PhantomReferenceTest {
                 if (phantomQueue != null) {
                     PhantomReference<PhantomReferenceTest> objt = null;
                     try {
+                        // 取出最近的一个虚引用
                         objt = (PhantomReference<PhantomReferenceTest>) phantomQueue.remove();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -32,27 +39,31 @@ public class PhantomReferenceTest {
         }
     }
 
+    //finalize()方法只能被调用一次！
     @Override
-    protected void finalize() throws Throwable { //finalize()方法只能被调用一次！
+    protected void finalize() throws Throwable {
         super.finalize();
         System.out.println("调用当前类的finalize()方法");
+        // 使对象复活
         obj = this;
     }
 
     public static void main(String[] args) {
         Thread t = new CheckRefQueue();
-        t.setDaemon(true);//设置为守护线程：当程序中没有非守护线程时，守护线程也就执行结束。
+        //设置为守护线程：当程序中没有非守护线程时，守护线程也就执行结束。
+        t.setDaemon(true);
         t.start();
 
-        phantomQueue = new ReferenceQueue<PhantomReferenceTest>();
+        phantomQueue = new ReferenceQueue<>();
         obj = new PhantomReferenceTest();
         //构造了 PhantomReferenceTest 对象的虚引用，并指定了引用队列
-        PhantomReference<PhantomReferenceTest> phantomRef = new PhantomReference<PhantomReferenceTest>(obj, phantomQueue);
+        PhantomReference<PhantomReferenceTest> phantomRef = new PhantomReference<>(obj, phantomQueue);
 
         try {
             //不可获取虚引用中的对象
             System.out.println(phantomRef.get());
 
+            System.out.println("------------第 1 次 gc---------------");
             //将强引用去除
             obj = null;
             //第一次进行GC,由于对象可复活，GC无法回收该对象
@@ -63,15 +74,19 @@ public class PhantomReferenceTest {
             } else {
                 System.out.println("obj 可用");
             }
-            System.out.println("第 2 次 gc");
+
+            System.out.println("------------第 2 次 gc--------------");
             obj = null;
-            System.gc(); //一旦将obj对象回收，就会将此虚引用存放到引用队列中。
+            // 一旦将obj对象回收，就会将此虚引用存放到引用队列中。
+            // 垃圾回收的时候，回收对象有虚引用的，就回把虚引用加入到引用到队列中
+            System.gc();
             Thread.sleep(1000);
             if (obj == null) {
                 System.out.println("obj 是 null");
             } else {
                 System.out.println("obj 可用");
             }
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

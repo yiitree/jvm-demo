@@ -4,20 +4,16 @@ import java.lang.ref.WeakReference;
 
 /**
  * 弱引用的测试
- *
- * @author shkstart  shkstart@126.com
- * @create 2020  16:06
  */
 public class WeakReferenceTest {
+
     public static class User {
         public User(int id, String name) {
             this.id = id;
             this.name = name;
         }
-
         public int id;
         public String name;
-
         @Override
         public String toString() {
             return "[id=" + id + ", name=" + name + "] ";
@@ -26,7 +22,7 @@ public class WeakReferenceTest {
 
     public static void main(String[] args) {
         //构造了弱引用
-        WeakReference<User> userWeakRef = new WeakReference<User>(new User(1, "songhk"));
+        WeakReference<User> userWeakRef = new WeakReference<>(new User(1, "songhk"));
         //从弱引用中重新获取对象
         System.out.println(userWeakRef.get());
 

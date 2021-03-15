@@ -4,11 +4,11 @@ import java.lang.ref.SoftReference;
 
 /**
  * 软引用的测试：内存不足即回收
- *
- * @author shkstart  shkstart@126.com
- * @create 2020  16:06
  */
 public class SoftReferenceTest {
+    /**
+     * 内部类
+     */
     public static class User {
         public User(int id, String name) {
             this.id = id;
@@ -25,13 +25,13 @@ public class SoftReferenceTest {
     }
 
     public static void main(String[] args) {
-        //创建对象，建立软引用
+        // 两种创建软引用方式：
+        //方式一：创建对象，建立软引用
 //        SoftReference<User> userSoftRef = new SoftReference<User>(new User(1, "songhk"));
-        //上面的一行代码，等价于如下的三行代码
+        //方式二：上面的一行代码，等价于如下的三行代码
         User u1 = new User(1,"songhk");
         SoftReference<User> userSoftRef = new SoftReference<User>(u1);
         u1 = null;//取消强引用
-
 
         //从软引用中重新获得强引用对象
         System.out.println(userSoftRef.get());
