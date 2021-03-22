@@ -1,1 +1,1 @@
-## jvm的一个测试demo
+## jvm的一个练习demo
