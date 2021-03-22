@@ -49,7 +49,8 @@ public class SoftReferenceTest {
             e.printStackTrace();
         } finally {
             //再次从软引用中获取数据
-            System.out.println(userSoftRef.get());//在报OOM之前，垃圾回收器会回收软引用的可达对象。
+            //在报OOM之前，垃圾回收器会回收软引用的可达对象。
+            System.out.println(userSoftRef.get());
         }
     }
 }
